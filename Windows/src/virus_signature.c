@@ -152,7 +152,6 @@ bool check_file_signature(const char *file_path, VirusSignatureDB *db)
     char file_hash[HASH_SIZE];
     compute_md5(file_path, file_hash);
 
-    const int num_threads = 4; // Number of threads to use
     HANDLE threads[num_threads];
     ThreadArgs thread_args[num_threads];
 

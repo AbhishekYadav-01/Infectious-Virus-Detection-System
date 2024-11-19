@@ -31,7 +31,18 @@ int main(int argc, char *argv[])
             *last_slash = '\0'; // Trim to folder path
 
         // Start behavioral analysis on the folder
-        start_behavior_analysis(folder_path, file_to_scan);
+        // Extract the virus name from the file path
+        char virus_name[MAX_PATH_LENGTH];
+        strncpy(virus_name, file_to_scan, MAX_PATH_LENGTH);
+        char *last_slash_virus = strrchr(virus_name, '\\');
+        if (last_slash_virus)
+        {
+            memmove(virus_name, last_slash_virus + 1, strlen(last_slash_virus));
+        }
+        printf("Virus name: %s\n", virus_name);
+
+        // Start behavioral analysis with the virus name
+        start_behavior_analysis(folder_path, virus_name);
     }
     else
     {

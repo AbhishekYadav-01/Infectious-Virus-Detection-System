@@ -8,6 +8,7 @@
 #define MAX_SIGNATURES 1000      // Adjust as needed based on your data
 #define MAX_FILENAME_LENGTH 1000 // Maximum length for file names
 #define MAX_LINE_LENGTH 1033     // Maximum length for a line in the CSV file
+#define num_threads 4
 
 // Structure to hold a single virus signature entry
 typedef struct

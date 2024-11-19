@@ -10,7 +10,6 @@ void log_suspicious_activity(const char *activity_type, const char *details) {
         perror("Unable to open log file");
         return;
     }
-
     time_t now;
     time(&now);
     char *timestamp = ctime(&now);

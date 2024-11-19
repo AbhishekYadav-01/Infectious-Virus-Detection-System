@@ -1,5 +1,6 @@
 CC = gcc
-CFLAGS = -lssl -lcrypto
+CFLAGS = -lssl -lcrypto -ltlsh   
+LDFLAGS = -ltlsh                
 
 all: main
 

@@ -9,14 +9,12 @@
 #define EVENT_BUF_LEN (1024 * (EVENT_SIZE + 16))
 
 void monitor_directory(const char *path) {
-    // Initialize inotify
     int fd = inotify_init();
     if (fd < 0) {
         perror("inotify_init");
         exit(EXIT_FAILURE);
     }
 
-    // Add a watch to the directory for create, delete, and modify events
     int wd = inotify_add_watch(fd, path, IN_CREATE | IN_DELETE | IN_MODIFY);
     if (wd == -1) {
         printf("Could not watch : %s\n", path);

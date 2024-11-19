@@ -1,0 +1,13 @@
+CC = gcc
+CFLAGS = -Iinclude
+SRC = src/main.c src/virus_signature.c
+LIBS = -lcrypt32
+TARGET = virus_checker
+
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+    $(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LIBS)
+
+clean:
+    del $(TARGET).exe

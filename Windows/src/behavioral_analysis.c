@@ -49,7 +49,12 @@ void monitor_and_terminate_virus(const char *virus_file)
             {
                 // Convert the process name to a multi-byte string for comparison
                 char processName[MAX_PATH];
+// Convert wide characters to multi-byte if UNICODE is defined
+#ifdef UNICODE
                 wcstombs(processName, pe32.szExeFile, MAX_PATH);
+#else
+                strncpy(processName, pe32.szExeFile, MAX_PATH);
+#endif
 
                 // Compare with the virus executable name
                 if (_stricmp(processName, virus_file) == 0)

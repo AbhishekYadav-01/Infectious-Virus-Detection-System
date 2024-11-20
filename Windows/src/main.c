@@ -3,7 +3,10 @@
 #include "../include/virus_signature.h"
 #include "../include/behavioral_analysis.h"
 #include "virus_signature.c"
+#include "alert_box.c"
+#include "../include/alert_box.h"
 #include "behavioral_analysis.c"
+#include "email.c"
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +44,15 @@ int main(int argc, char *argv[])
         }
         printf("Virus name: %s\n", virus_name);
 
+        // Generate alert box
+        char hash[HASH_SIZE];
+        compute_md5(file_to_scan, hash);
+        char alert_message[256];
+        snprintf(alert_message, sizeof(alert_message), "Virus detected: %s\nFolder: %s\nHash: %s\n", virus_name, folder_path, hash);
+        show_alert(alert_message);
+
+        // Send email notification
+        send_email_notification(virus_name, folder_path, hash);
         // Start behavioral analysis with the virus name
         start_behavior_analysis(folder_path, virus_name);
     }
